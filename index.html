@@ -51,6 +51,7 @@
 
   .content{max-width:1200px;margin:auto;padding:20px 20px 80px;}
 
+  /* Lock Overlay */
   .lock-overlay{position:fixed;inset:0;background:rgba(10,10,15,.95);backdrop-filter:blur(12px);z-index:500;display:flex;justify-content:center;align-items:center;padding:20px;transition:opacity .4s,visibility .4s;}
   .lock-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;}
   .lock-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;max-width:420px;width:100%;text-align:center;box-shadow:0 25px 80px var(--shadow);position:relative;overflow:hidden;}
@@ -133,6 +134,14 @@
 
 <main class="content" id="container"></main>
 
+<!-- About Section -->
+<section class="content" style="padding-top:0;">
+  <div class="inst-section" style="text-align:center;">
+    <h2 style="margin-bottom:12px;">About Batch Hub Pro</h2>
+    <p style="color:var(--muted);max-width:700px;margin:auto;">Batch Hub Pro aapko India ke top coaching institutes ke latest batches ek hi jagah par provide karta hai. Hamara maqsad hai ki aapko sahi batch dhundhne mein aasaani ho, chahe woh kisi bhi platform ka ho. Hum har roz naye batches aur updates laate hain, taaki aap kuch bhi miss na karein.</p>
+  </div>
+</section>
+
 <footer class="footer">
   <p>© 2025 Batch Hub Pro — Sabhi batches partner institutes ke hain.</p>
   <p style="margin-top:6px;">Telegram: <a href="https://t.me/batchhubb" target="_blank">@batchhubb</a> | Contact: <a href="https://t.me/Supermannn_x" target="_blank">@Supermannn_x</a></p>
@@ -140,38 +149,38 @@
 
 <script>
 const INSTITUTES = [
-  { name: "Next Topper", slug: "next-topper", color: "#f59e0b" },
-  { name: "Study IQ", slug: "study-iq", color: "#3b82f6" },
-  { name: "Rojgar With Ankit", slug: "rojgar-with-ankit", color: "#10b981" },
-  { name: "CDS Journey", slug: "cds-journey", color: "#ef4444" },
-  { name: "Khan Global Studies (KGS)", slug: "kgs", color: "#8b5cf6" },
-  { name: "UC Live Rani Mam", slug: "uc-live", color: "#ec4899" },
-  { name: "Gyanbindu", slug: "gyanbindu", color: "#14b8a6" },
-  { name: "GK GS Masti", slug: "gk-gs-masti", color: "#f97316" },
-  { name: "Physics Wallah", slug: "physics-wallah", color: "#6366f1" },
-  { name: "Disha Online Class", slug: "disha-online", color: "#06b6d4" },
-  { name: "Master Sahab", slug: "master-sahab", color: "#f43f5e" },
-  { name: "Classplus", slug: "classplus", color: "#a855f7" },
-  { name: "Unacademy", slug: "unacademy", color: "#22c55e" },
-  { name: "Vidyakul", slug: "vidyakul", color: "#84cc16" },
-  { name: "Science Magnet", slug: "science-magnet", color: "#d946ef" },
-  { name: "Parmar Academy", slug: "parmar-academy", color: "#0ea5e9" },
-  { name: "RG Vikramjeet", slug: "rg-vikramjeet", color: "#fb923c" },
-  { name: "Testbook", slug: "testbook", color: "#2563eb" },
-  { name: "Utkarsh Classes", slug: "utkarsh", color: "#059669" },
-  { name: "Yes Officer", slug: "yes-officer", color: "#dc2626" },
-  { name: "KD LIVE", slug: "kd-live", color: "#7c3aed" },
-  { name: "Selection Way", slug: "selection-way", color: "#db2777" },
-  { name: "Careerwill", slug: "careerwill", color: "#0d9488" },
-  { name: "IFAS Academy", slug: "ifas", color: "#ea580c" },
-  { name: "MD Classes", slug: "md-classes", color: "#4f46e5" },
-  { name: "GS Vision", slug: "gs-vision", color: "#0891b2" },
-  { name: "Vibrant Academy", slug: "vibrant", color: "#e11d48" },
-  { name: "Apna College", slug: "apna-college", color: "#9333ea" },
-  { name: "Unacademy Offline", slug: "unacademy-offline", color: "#16a34a" },
-  { name: "KGS Test", slug: "kgs-test", color: "#65a30d" },
-  { name: "Adda247", slug: "adda247", color: "#c026d3" },
-  { name: "PW Skills", slug: "pw-skills", color: "#0284c7" }
+  { name: "Next Topper", slug: "next-topper", color: "#f59e0b", logo: "" },
+  { name: "Study IQ", slug: "study-iq", color: "#3b82f6", logo: "" },
+  { name: "Rojgar With Ankit", slug: "rojgar-with-ankit", color: "#10b981", logo: "" },
+  { name: "CDS Journey", slug: "cds-journey", color: "#ef4444", logo: "" },
+  { name: "Khan Global Studies (KGS)", slug: "kgs", color: "#8b5cf6", logo: "" },
+  { name: "UC Live Rani Mam", slug: "uc-live", color: "#ec4899", logo: "" },
+  { name: "Gyanbindu", slug: "gyanbindu", color: "#14b8a6", logo: "" },
+  { name: "GK GS Masti", slug: "gk-gs-masti", color: "#f97316", logo: "" },
+  { name: "Physics Wallah", slug: "physics-wallah", color: "#6366f1", logo: "" },
+  { name: "Disha Online Class", slug: "disha-online", color: "#06b6d4", logo: "" },
+  { name: "Master Sahab", slug: "master-sahab", color: "#f43f5e", logo: "" },
+  { name: "Classplus", slug: "classplus", color: "#a855f7", logo: "" },
+  { name: "Unacademy", slug: "unacademy", color: "#22c55e", logo: "" },
+  { name: "Vidyakul", slug: "vidyakul", color: "#84cc16", logo: "" },
+  { name: "Science Magnet", slug: "science-magnet", color: "#d946ef", logo: "" },
+  { name: "Parmar Academy", slug: "parmar-academy", color: "#0ea5e9", logo: "" },
+  { name: "RG Vikramjeet", slug: "rg-vikramjeet", color: "#fb923c", logo: "" },
+  { name: "Testbook", slug: "testbook", color: "#2563eb", logo: "" },
+  { name: "Utkarsh Classes", slug: "utkarsh", color: "#059669", logo: "" },
+  { name: "Yes Officer", slug: "yes-officer", color: "#dc2626", logo: "" },
+  { name: "KD LIVE", slug: "kd-live", color: "#7c3aed", logo: "" },
+  { name: "Selection Way", slug: "selection-way", color: "#db2777", logo: "" },
+  { name: "Careerwill", slug: "careerwill", color: "#0d9488", logo: "" },
+  { name: "IFAS Academy", slug: "ifas", color: "#ea580c", logo: "" },
+  { name: "MD Classes", slug: "md-classes", color: "#4f46e5", logo: "" },
+  { name: "GS Vision", slug: "gs-vision", color: "#0891b2", logo: "" },
+  { name: "Vibrant Academy", slug: "vibrant", color: "#e11d48", logo: "" },
+  { name: "Apna College", slug: "apna-college", color: "#9333ea", logo: "" },
+  { name: "Unacademy Offline", slug: "unacademy-offline", color: "#16a34a", logo: "" },
+  { name: "KGS Test", slug: "kgs-test", color: "#65a30d", logo: "" },
+  { name: "Adda247", slug: "adda247", color: "#c026d3", logo: "" },
+  { name: "PW Skills", slug: "pw-skills", color: "#0284c7", logo: "" }
 ];
 
 // ============================================================
@@ -179,7 +188,6 @@ const INSTITUTES = [
 // ============================================================
 // Naya batch add karne ke liye neeche wala format use karo.
 // Har institute ke [] ke andar batches daalo (comma se alag).
-// Agar ek se zyada batch hain, toh comma (,) laga ke next line mein daalo.
 //
 //   { title: "Batch ka naam", description: "Chhota description", price: "499", original_price: "1999", link: "https://...", image_url: "https://...", featured: true },
 //
@@ -188,7 +196,6 @@ const INSTITUTES = [
 
 const BATCHES = {
   "next-topper": [
-    // Example batch (Isko delete karke apna daalo):
     { title: "SSC CGL 2025 Complete Batch", description: "Full syllabus coverage with practice sets", price: "499", original_price: "1999", link: "https://nexttopper.com", image_url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80", featured: true },
     { title: "Railway Group D 2025", description: "Latest pattern based batch", price: "399", original_price: "1499", link: "https://nexttopper.com", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: false }
   ],
