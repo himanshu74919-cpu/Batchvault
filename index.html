@@ -149,9 +149,6 @@
 </footer>
 
 <script>
-// ============================================================
-// 32 INSTITUTES KI LIST WITH LOGOS
-// ============================================================
 const INSTITUTES = [
   { name: "Next Topper", slug: "next-topper", color: "#f59e0b", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/next-topper.png" },
   { name: "Study IQ", slug: "study-iq", color: "#3b82f6", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/studyiq.png" },
@@ -187,49 +184,103 @@ const INSTITUTES = [
   { name: "Adda247", slug: "adda247", color: "#c026d3", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/adda247.png" }
 ];
 
-// ============================================================
-// YAHAN BATCHES ADD KARO (Option A)
-// ============================================================
-// Naya batch add karne ke liye neeche wala format use karo.
-// Har institute ke [] ke andar batches daalo (comma se alag).
-//
-//   { title: "Batch ka naam", description: "Chhota description", price: "499", original_price: "1999", link: "https://...", image_url: "https://...", featured: true },
-//
-// ============================================================
-
 const BATCHES = {
-  "next-topper": [],
-  "study-iq": [],
-  "rojgar-with-ankit": [],
-  "cds-journey": [],
-  "kgs": [],
-  "uc-live": [],
-  "gyanbindu": [],
-  "gk-gs-masti": [],
-  "physics-wallah": [],
-  "disha-online": [],
-  "master-sahab": [],
-  "classplus": [],
-  "unacademy": [],
-  "vidyakul": [],
-  "science-magnet": [],
-  "parmar-academy": [],
-  "rg-vikramjeet": [],
-  "testbook": [],
-  "utkarsh": [],
-  "yes-officer": [],
-  "kd-live": [],
-  "selection-way": [],
-  "careerwill": [],
-  "ifas": [],
-  "md-classes": [],
-  "gs-vision": [],
-  "vibrant": [],
-  "apna-college": [],
-  "unacademy-offline": [],
-  "kgs-test": [],
-  "vidyagram": [],
-  "adda247": []
+  "next-topper": [
+    { title: "SSC CGL 2026 Batch 'Palvit'", description: "Tier-I & Tier-II Complete Preparation", price: "499", original_price: "1999", link: "https://nexttopper.com", image_url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "study-iq": [
+    { title: "UPSC IAS Live GS P2I Foundation 2027", description: "Prelims to Interview Program", price: "999", original_price: "4999", link: "https://studyiq.com", image_url: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "rojgar-with-ankit": [
+    { title: "UPSSSC PET 2026 (वरदान बैच 4.O)", description: "Complete Foundation Batch", price: "599", original_price: "1499", link: "https://rojgarwithankit.co.in", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "cds-journey": [
+    { title: "TANGO Math Batch (CDS 2 2024)", description: "Complete Maths for CDS Exam", price: "499", original_price: "1999", link: "https://cdsjourney.com", image_url: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "kgs": [
+    { title: "BPSC TRE 4.0 Class (9-10 & 11-12)", description: "Complete Batch for BPSC TRE", price: "799", original_price: "2999", link: "https://khanglobalstudies.com", image_url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "uc-live": [
+    { title: "ACHIEVERS 9.0 – Complete English Batch", description: "Grammar + Practice + Vocabulary + Descriptive", price: "1999", original_price: "4999", link: "https://uclive.org", image_url: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "gyanbindu": [
+    { title: "72nd BPSC SPECIAL BATCH", description: "Complete Foundation Batch for BPSC", price: "999", original_price: "3999", link: "https://gyanbinduacademy.com", image_url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "gk-gs-masti": [
+    { title: "Bihar Police GK Batch", description: "Complete GK/GS for Bihar Police", price: "399", original_price: "999", link: "https://gkgsmasti.com", image_url: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "physics-wallah": [
+    { title: "Surya 3.0 SSC CGL Target 2026", description: "Hinglish Complete Batch", price: "499", original_price: "1999", link: "https://www.pw.live/", image_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "disha-online": [
+    { title: "Parivartan Batch Class 11", description: "Bihar Board 2026-2027 Complete Batch", price: "299", original_price: "999", link: "https://dishaonlineclasses.in", image_url: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "master-sahab": [
+    { title: "Master Sahab Complete Batch", description: "All Competitive Exams Preparation", price: "399", original_price: "1499", link: "https://mastersahab.com", image_url: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "classplus": [
+    { title: "Classplus Batch Management", description: "For Coaching Institutes", price: "", original_price: "", link: "https://classplusapp.com", image_url: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "unacademy": [
+    { title: "ARJUN Batch- Full Syllabus 2026-27", description: "Complete Preparation for Class 10", price: "999", original_price: "4999", link: "https://unacademy.com", image_url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "vidyakul": [
+    { title: "Officer Batch 2.0 2026", description: "Complete Preparation for Competitive Exams", price: "499", original_price: "1999", link: "https://vidyakul.com", image_url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "science-magnet": [
+    { title: "विराट Batch (Viraat Batch)", description: "Railway ALP, Tech, JE & Group D", price: "299", original_price: "999", link: "https://sciencemagnet.com", image_url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "parmar-academy": [
+    { title: "Parmar GK Batch 4.0 - 2026", description: "Complete GK for SSC Exams", price: "399", original_price: "1499", link: "https://parmaracademy.com", image_url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "rg-vikramjeet": [
+    { title: "MATHS VOD BATCH", description: "For SSC, Railway, Delhi Police & Other Exams", price: "699", original_price: "1999", link: "https://rgvikramjeet.com", image_url: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "testbook": [
+    { title: "SSC GD 2026 দুর্জয় 2.0 Live Batch", description: "Complete SSC GD Preparation", price: "299", original_price: "999", link: "https://testbook.com", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "utkarsh": [
+    { title: "GK & GS Gaganyaan Batch", description: "By Kumar Gaurav Sir", price: "499", original_price: "1999", link: "https://utkarsh.com", image_url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "yes-officer": [
+    { title: "Kush Pandey – Exclusive Batch", description: "Complete Banking Preparation", price: "499", original_price: "1999", link: "https://yesofficer.com", image_url: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "kd-live": [
+    { title: "FOUNDATION BATCH FOR SSC", description: "Live Class VODs Test Series", price: "599", original_price: "1199", link: "https://kdcampus.live", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "selection-way": [
+    { title: "Selection Batch 4.0", description: "Complete SSC Preparation", price: "499", original_price: "1999", link: "https://selectionway.com", image_url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "careerwill": [
+    { title: "SSC Pratham-17", description: "Complete SSC Foundation Batch", price: "1999", original_price: "4999", link: "https://careerwill.com", image_url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "ifas": [
+    { title: "IFAS Emotion Batch 8.0", description: "One Target CSIR JRF Dec 2026", price: "999", original_price: "4999", link: "https://ifasacademy.com", image_url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "md-classes": [
+    { title: "विश्वास 2026 + RANKERS BATCH FREE", description: "Complete RRB NTPC Batch", price: "399", original_price: "1499", link: "https://mdclasses.com", image_url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "gs-vision": [
+    { title: "GS + CSAT Regular Batch 2026", description: "Foundation Course General Studies", price: "999", original_price: "3999", link: "https://gsvision.com", image_url: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "vibrant": [
+    { title: "JEE 2027: DROPPER X2 BATCH", description: "Complete JEE Preparation", price: "3500", original_price: "7000", link: "https://vibrantacademy.com", image_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "apna-college": [
+    { title: "Prime 2.0 - Complete AI/ML Batch", description: "Job Ready in 4.5 Months", price: "6880", original_price: "13999", link: "https://www.apnacollege.in/", image_url: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "unacademy-offline": [
+    { title: "UPSC GS Foundation Migration", description: "Admissions Open for 2026", price: "", original_price: "", link: "https://unacademy.com", image_url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "kgs-test": [
+    { title: "KGS Test Series", description: "Complete Test Series for All Exams", price: "299", original_price: "999", link: "https://kgs.live", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "vidyagram": [
+    { title: "RRB Group-D 2026 Free Live Test", description: "All India Live Test Series", price: "", original_price: "", link: "https://www.vidyagram.online/", image_url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=80", featured: true }
+  ],
+  "adda247": [
+    { title: "PowerPack Pro 2026 Batch for IBPS PO", description: "Complete Banking Preparation", price: "499", original_price: "1999", link: "https://www.adda247.com/", image_url: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=500&q=80", featured: true }
+  ]
 };
 
 const LOCK_KEY = 'batchhub_unlocked';
