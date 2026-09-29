@@ -1,369 +1,432 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batch Hub Pro — Sabhi Coaching Batches Ek Jagah</title>
+<title>PW Learn - Study App</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f; --bg2: #12121a; --card: #1a1a26; --border: #2a2a3a;
-    --text: #e8e8f0; --muted: #8888a0; --grad: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
-    --shadow: rgba(0,0,0,0.5); --glow: rgba(99,102,241,0.3);
+    --primary: #6366f1; /* PW Indigo */
+    --primary-light: #eef2ff;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --success: #22c55e;
+    --badge-bg: #fef08a;
+    --badge-text: #854d0e;
   }
-  body.light {
-    --bg: #f8fafc; --bg2: #ffffff; --card: #ffffff; --border: #e2e8f0;
-    --text: #0f172a; --muted: #64748b; --shadow: rgba(0,0,0,0.08); --glow: rgba(99,102,241,0.15);
+  .dark {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: #334155;
+    --primary-light: #312e81;
   }
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter','Segoe UI',sans-serif; transition: background 0.3s, color 0.3s, border-color 0.3s;}
-  body{background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;}
-  body::before{content:'';position:fixed;inset:0;z-index:-1;
-    background: radial-gradient(ellipse at 20% 0%, rgba(99,102,241,.15), transparent 50%),
-                radial-gradient(ellipse at 80% 100%, rgba(168,85,247,.12), transparent 50%);
-    animation: bgShift 15s ease infinite alternate;}
-  @keyframes bgShift { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Nunito Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--bg); color: var(--text); padding-bottom: 80px; transition: background 0.3s, color 0.3s; }
+  
+  /* App Container */
+  .app-container { max-width: 500px; margin: 0 auto; background: var(--bg); min-height: 100vh; position: relative; overflow-x: hidden; }
 
   /* Top Banner */
-  .top-banner { background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899); color: #fff; text-align: center; padding: 10px 15px; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 200; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-  .top-banner a { color: #fff; text-decoration: underline; font-weight: 800; }
-  .top-banner a:hover { color: #ffe066; }
+  .top-banner { background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899); color: #fff; text-align: center; padding: 8px 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; }
+  .top-banner a { color: #fff; text-decoration: underline; }
 
-  header{background:var(--bg);opacity:0.95;backdrop-filter:blur(20px);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:41px;z-index:100;border-bottom:1px solid var(--border);}
-  .logo{font-size:24px;font-weight:800;}
-  .logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .controls { display: flex; gap: 10px; align-items: center; }
-  .theme-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 10px; font-size: 18px; cursor: pointer; transition: all 0.2s; }
-  .theme-btn:hover { transform: scale(1.1); border-color: #6366f1; }
-  .tg-badge{background:#229ED9;color:#fff;padding:8px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px; transition: all 0.2s;}
-  .tg-badge:hover { background: #1a8bbf; transform: translateY(-2px); }
+  /* Header */
+  header { position: sticky; top: 0; z-index: 50; background: var(--card); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .menu-icon { font-size: 24px; cursor: pointer; }
+  .goal-pill { display: flex; align-items: center; gap: 6px; background: var(--bg); border: 1px solid var(--border); padding: 6px 12px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .goal-pill span { color: var(--primary); }
+  .header-right { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
+  .stat-pill { display: flex; align-items: center; gap: 4px; background: var(--bg); border: 1px solid var(--border); padding: 4px 10px; border-radius: 50px; }
+  .theme-toggle { background: none; border: none; font-size: 20px; cursor: pointer; padding: 4px; }
 
-  .hero{text-align:center;padding:60px 20px 40px;max-width:900px;margin:auto;}
-  .hero-badge{display:inline-block;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);color:#a5b4fc;padding:6px 16px;border-radius:100px;font-size:13px;font-weight:600;margin-bottom:20px;}
-  .hero h1{font-size:clamp(32px,6vw,56px);font-weight:900;letter-spacing:-2px;line-height:1.1;margin-bottom:16px;}
-  .hero h1 span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .hero p{color:var(--muted);font-size:17px;max-width:600px;margin:auto;}
-  .stats-row{display:flex;justify-content:center;gap:40px;margin-top:36px;flex-wrap:wrap;}
-  .stat-num{font-size:28px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-  .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;}
+  /* Quick Links */
+  .quick-links { background: var(--card); border-bottom: 1px solid var(--border); }
+  .quick-link-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; font-size: 14px; font-weight: 800; cursor: pointer; border-bottom: 1px solid var(--border); }
+  .quick-link-item:last-child { border-bottom: none; }
 
-  .search-wrap{max-width:560px;margin:36px auto 0;}
-  .search-wrap input{width:100%;padding:16px 20px;border-radius:14px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:15px; box-shadow: 0 4px 15px var(--shadow);}
-  .search-wrap input:focus{outline:none;border-color:#6366f1; box-shadow: 0 0 0 4px var(--glow);}
-
-  .content{max-width:1200px;margin:auto;padding:20px 20px 80px;}
-
-  /* Lock Overlay */
-  .lock-overlay{position:fixed;inset:0;background:rgba(10,10,15,.95);backdrop-filter:blur(12px);z-index:500;display:flex;justify-content:center;align-items:center;padding:20px;transition:opacity .4s,visibility .4s;}
-  .lock-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;}
-  .lock-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;max-width:420px;width:100%;text-align:center;box-shadow:0 25px 80px var(--shadow);position:relative;overflow:hidden;}
-  .lock-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad);}
-  .lock-icon{font-size:56px;margin-bottom:16px;display:block;}
-  .lock-box h2{font-size:24px;font-weight:800;margin-bottom:10px;}
-  .lock-box p{color:var(--muted);font-size:15px;margin-bottom:28px;}
-  .btn-telegram{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#229ED9;color:#fff;padding:15px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;width:100%;margin-bottom:14px;transition:all .25s;}
-  .btn-telegram:hover{background:#1a8bbf;transform:translateY(-2px);box-shadow:0 10px 30px rgba(34,158,217,.4);}
-  .btn-verify{background:var(--grad);color:#fff;padding:15px 32px;border-radius:12px;font-weight:700;font-size:16px;width:100%;border:none;cursor:pointer;transition:all .25s;}
-  .btn-verify:hover{transform:translateY(-2px);box-shadow:0 10px 30px var(--glow);}
-  .lock-note{font-size:13px;color:var(--muted);margin-top:16px;}
-
-  .inst-section{margin-bottom:40px;background:var(--card);border-radius:18px;padding:24px;border:1px solid var(--border); box-shadow: 0 4px 20px var(--shadow);}
-  .inst-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border);}
-  .inst-logo{width:40px;height:40px;border-radius:10px;object-fit:contain;background:#ffffff;padding:3px; border: 1px solid var(--border);}
-  .inst-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
-  .inst-header h2{font-size:22px;font-weight:700;}
-  .inst-count{margin-left:auto;font-size:12px;color:var(--muted);background:var(--bg);padding:4px 12px;border-radius:100px; border: 1px solid var(--border);}
+  /* Sections */
+  .section { background: var(--card); padding: 16px; margin-bottom: 8px; }
+  .section-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .section-title button { background: var(--bg); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 800; color: var(--primary); cursor: pointer; }
   
-  /* Bigger, Attractive Cards */
-  .batch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
-  .batch-card{background:var(--bg2);border-radius:18px;padding:18px;border:1px solid var(--border);transition:all .35s cubic-bezier(0.4, 0, 0.2, 1);display:flex;flex-direction:column;position:relative; overflow:hidden;}
-  .batch-card:hover{transform:translateY(-8px);border-color:#6366f1;box-shadow:0 20px 40px var(--glow);}
-  .batch-card img{width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:16px; transition: transform 0.5s ease;}
-  .batch-card:hover img { transform: scale(1.05); }
-  .batch-card h3{font-size:18px;font-weight:800;margin-bottom:8px;line-height:1.3;}
-  .batch-card .desc{font-size:14px;color:var(--muted);margin-bottom:14px;flex-grow:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-  .price-row{display:flex;gap:10px;align-items:center;margin-bottom:14px;}
-  .price{font-weight:800;color:#22c55e;font-size:20px;}
-  .old-price{color:#64748b;text-decoration:line-through;font-size:14px;}
-  .batch-card a{display:block;text-align:center;background:var(--grad);color:#fff;padding:12px;border-radius:12px;text-decoration:none;font-weight:700;font-size:15px; transition: all 0.3s;}
-  .batch-card a:hover { letter-spacing: 1px; opacity: 0.9; }
-  .empty{color:var(--muted);font-size:14px;font-style:italic;padding:12px 0;}
-  .badge-featured{position:absolute;top:24px;right:24px;background:var(--grad);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;letter-spacing:.5px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
+  /* Today's Class */
+  .class-card { border: 1px dashed var(--border); border-radius: 12px; padding: 20px; text-align: center; font-size: 13px; font-weight: 700; color: var(--muted); }
 
-  .footer{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px;border-top:1px solid var(--border); margin-top: 40px;}
-  .footer a{color:#a5b4fc;text-decoration:none; font-weight: 600;}
-  @media(max-width:600px){.hero{padding:50px 16px 30px;}.batch-grid{grid-template-columns:1fr;}.inst-section{padding:16px;} .batch-card img { height: 160px; }}
+  /* Grid */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+  .grid-item { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; cursor: pointer; transition: transform 0.2s; }
+  .grid-item:active { transform: scale(0.95); }
+  .grid-icon { font-size: 24px; margin-bottom: 8px; }
+  .grid-label { font-size: 11px; font-weight: 800; color: var(--text); }
+
+  /* PW Books Banner */
+  .books-banner { background: linear-gradient(135deg, #e0e7ff, #f3e8ff); border-radius: 14px; padding: 16px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .books-banner h3 { font-size: 16px; font-weight: 800; color: #1e1b4b; }
+  .books-banner p { font-size: 12px; color: #4338ca; margin-top: 4px; }
+  .books-banner button { background: #1e1b4b; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+
+  /* Explore Cards */
+  .explore-card { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; cursor: pointer; }
+  .explore-icon { width: 40px; height: 40px; background: var(--primary-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .explore-text { flex: 1; }
+  .explore-text h4 { font-size: 13px; font-weight: 800; }
+  .explore-text p { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* Footer Quote */
+  .footer-quote { text-align: center; padding: 30px 20px; }
+  .footer-quote p { font-size: 14px; font-weight: 700; color: var(--muted); font-style: italic; }
+
+  /* Bottom Navigation */
+  .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: var(--card); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0 12px; z-index: 100; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: none; font-size: 10px; font-weight: 700; color: var(--muted); cursor: pointer; width: 60px; position: relative; }
+  .nav-item.active { color: var(--primary); }
+  .nav-item.active::after { content: ''; position: absolute; top: -8px; width: 20px; height: 3px; background: var(--primary); border-radius: 0 0 4px 4px; }
+  .nav-icon { font-size: 20px; }
+  .badge-new { position: absolute; top: -6px; right: 0; background: var(--badge-bg); color: var(--badge-text); font-size: 8px; padding: 2px 4px; border-radius: 4px; font-weight: 800; }
+
+  /* Batches View */
+  .batch-list { padding: 16px; display: none; }
+  .batch-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 12px; display: flex; gap: 12px; align-items: center; transition: transform 0.2s; }
+  .batch-card:active { transform: scale(0.98); }
+  .batch-logo { width: 50px; height: 50px; border-radius: 10px; background: #fff; object-fit: contain; padding: 4px; border: 1px solid var(--border); }
+  .batch-info { flex: 1; }
+  .batch-info h4 { font-size: 14px; font-weight: 800; }
+  .batch-info p { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .batch-price { font-size: 13px; font-weight: 800; color: var(--success); }
+  .batch-btn { background: var(--primary); color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 4px;}
+
+  /* Search Bar */
+  .search-bar { padding: 12px 16px; background: var(--card); border-bottom: 1px solid var(--border); }
+  .search-bar input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 13px; font-family: inherit; }
+  .search-bar input:focus { outline: none; border-color: var(--primary); }
 </style>
 </head>
 <body>
 
-<!-- Top Advertisement Banner -->
-<div class="top-banner">
-  📢 Kisi bhi platform ka batch chahiye? DM kare Telegram pe <a href="https://t.me/Supermannn_x" target="_blank">@Supermannn_x</a>
+<div class="app-container">
+
+  <!-- Top Ad Banner -->
+  <div class="top-banner">
+    📢 Kisi bhi platform ka batch chahiye? DM kare Telegram pe <a href="https://t.me/Supermannn_x" target="_blank">@Supermannn_x</a>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <span class="menu-icon" onclick="toggleMenu()">☰</span>
+      <div class="goal-pill">
+        <span>🎯</span> All Exams <span>›</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="stat-pill">🔥 0</div>
+      <div class="stat-pill">⚡ 0</div>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </div>
+  </header>
+
+  <!-- Dashboard View -->
+  <div id="dashboard-view">
+    <!-- Quick Links -->
+    <div class="quick-links">
+      <div class="quick-link-item" onclick="switchView('batches')">
+        <span>Explore Batches</span>
+        <span>›</span>
+      </div>
+    </div>
+
+    <!-- Today's Class -->
+    <div class="section">
+      <div class="section-title">
+        <span>Today's Class</span>
+        <button>📅 Weekly Schedule</button>
+      </div>
+      <div class="class-card">
+        Enroll in a batch to see classes
+      </div>
+      <div style="text-align:center; margin-top:12px;">
+        <span style="font-size:12px; font-weight:800; color:var(--primary); cursor:pointer;" onclick="switchView('batches')">Explore Batches ›</span>
+      </div>
+    </div>
+
+    <!-- Quick Access Grid -->
+    <div class="section">
+      <div class="section-title">Quick Access</div>
+      <div class="grid-3">
+        <div class="grid-item" onclick="switchView('batches')">
+          <div class="grid-icon">📚</div>
+          <div class="grid-label">My Batches</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">🕒</div>
+          <div class="grid-label">My History</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">❓</div>
+          <div class="grid-label">My Doubts</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">📊</div>
+          <div class="grid-label">Dashboard</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">📥</div>
+          <div class="grid-label">Downloads</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">📄</div>
+          <div class="grid-label">PDF Bank</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">🏆</div>
+          <div class="grid-label">Rank Predictor</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">⚔️</div>
+          <div class="grid-label">Battleground</div>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">🔖</div>
+          <div class="grid-label">Bookmarks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PW Books Banner -->
+    <div class="section">
+      <div class="books-banner">
+        <div>
+          <h3>📖 PW Books App</h3>
+          <p>🤖 AI Explanations<br>📋 PYQ Practice & NCERT Solutions<br>✏️ Smart Notes & Highlights</p>
+          <button>Download Now</button>
+        </div>
+        <div style="font-size:40px;">📱</div>
+      </div>
+    </div>
+
+    <!-- Explore Section -->
+    <div class="section">
+      <div class="section-title">Explore</div>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Get additional guidance with these features</p>
+      
+      <div class="explore-card">
+        <div class="explore-icon">📚</div>
+        <div class="explore-text">
+          <h4>Library</h4>
+          <p>Access all your free study material here</p>
+        </div>
+        <span>›</span>
+      </div>
+      <div class="explore-card">
+        <div class="explore-icon">👨‍🏫</div>
+        <div class="explore-text">
+          <h4>Mentorship</h4>
+          <p>Get free guidance from PW Alumni and Toppers</p>
+        </div>
+        <span>›</span>
+      </div>
+    </div>
+
+    <!-- Footer Quote -->
+    <div class="footer-quote">
+      <p>Padhlo chahe kahi se, manzil milegi yahi se...</p>
+      <p style="font-size:12px; margin-top:8px;">❤️ From Batch Hub Pro</p>
+    </div>
+  </div>
+
+  <!-- Batches View -->
+  <div id="batches-view" class="batch-list">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="🔍 Search batches or institutes..." oninput="renderBatches(this.value)">
+    </div>
+    <div id="batchContainer"></div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="switchView('batches')" id="nav-batches">
+      <span class="nav-icon">📺</span>
+      <span>Batches</span>
+    </button>
+    <button class="nav-item active" onclick="switchView('dashboard')" id="nav-study">
+      <span class="nav-icon">📖</span>
+      <span>Study</span>
+    </button>
+    <button class="nav-item" onclick="switchView('pi')" id="nav-pi">
+      <span class="badge-new">New</span>
+      <span class="nav-icon">π</span>
+      <span>Pi</span>
+    </button>
+  </nav>
+
 </div>
-
-<div class="lock-overlay" id="lockOverlay">
-  <div class="lock-box">
-    <span class="lock-icon">🔒</span>
-    <h2>Batches Unlock Karo</h2>
-    <p>Saare batches dekhne ke liye pehle humara Telegram channel join karo. Bilkul free hai!</p>
-    <a href="https://t.me/batchhubb" target="_blank" rel="noopener" class="btn-telegram">✈️ Join @batchhubb</a>
-    <button class="btn-verify" onclick="unlock()">✅ Maine Join Kar Liya — Unlock Karo</button>
-    <p class="lock-note">Join karne ke baad upar wala button dabao.</p>
-  </div>
-</div>
-
-<header>
-  <div class="logo">📦 Batch Hub <span>Pro</span></div>
-  <div class="controls">
-    <button class="theme-btn" id="themeToggle" title="Toggle Theme">🌙</button>
-    <a href="https://t.me/Supermannn_x" target="_blank" class="tg-badge">✈️ Contact</a>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="hero-badge">⚡ India's #1 Coaching Batch Aggregator</div>
-  <h1>Sabhi Coaching <span>Batches</span><br>Ek Jagah</h1>
-  <p>32+ top institutes ke latest batches — Study IQ, Physics Wallah, Unacademy, Adda247, KGS aur bahut kuch.</p>
-  <div class="stats-row">
-    <div class="stat"><div class="stat-num">32+</div><div class="stat-label">Institutes</div></div>
-    <div class="stat"><div class="stat-num" id="batchCount">0</div><div class="stat-label">Batches</div></div>
-    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free</div></div>
-  </div>
-  <div class="search-wrap">
-    <input id="searchBox" type="text" placeholder="🔍 Batch ya institute search karo...">
-  </div>
-</section>
-
-<main class="content" id="container"></main>
-
-<!-- About Section -->
-<section class="content" style="padding-top:0;">
-  <div class="inst-section" style="text-align:center;">
-    <h2 style="margin-bottom:12px;">About Batch Hub Pro</h2>
-    <p style="color:var(--muted);max-width:700px;margin:auto;">Batch Hub Pro aapko India ke top coaching institutes ke latest batches ek hi jagah par provide karta hai. Hamara maqsad hai ki aapko sahi batch dhundhne mein aasaani ho, chahe woh kisi bhi platform ka ho. Hum har roz naye batches aur updates laate hain, taaki aap kuch bhi miss na karein.</p>
-  </div>
-</section>
-
-<footer class="footer">
-  <p>© 2025 Batch Hub Pro — Sabhi batches partner institutes ke hain.</p>
-  <p style="margin-top:6px;">Telegram: <a href="https://t.me/batchhubb" target="_blank">@batchhubb</a> | Contact: <a href="https://t.me/Supermannn_x" target="_blank">@Supermannn_x</a></p>
-</footer>
 
 <script>
+// ============================================================
+// 32 INSTITUTES KI LIST WITH LOGOS
+// ============================================================
 const INSTITUTES = [
-  { name: "Next Topper", slug: "next-topper", color: "#f59e0b", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/next-topper.png" },
-  { name: "Study IQ", slug: "study-iq", color: "#3b82f6", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/studyiq.png" },
-  { name: "Rojgar With Ankit", slug: "rojgar-with-ankit", color: "#10b981", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/rojgar-with-ankit.png" },
-  { name: "CDS Journey", slug: "cds-journey", color: "#ef4444", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/cds-journey.png" },
-  { name: "Khan Global Studies (KGS)", slug: "kgs", color: "#8b5cf6", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kgs.png" },
-  { name: "UC Live Rani Mam", slug: "uc-live", color: "#ec4899", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/uc-live.png" },
-  { name: "Gyanbindu", slug: "gyanbindu", color: "#14b8a6", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gyanbindu.png" },
-  { name: "GK GS Masti", slug: "gk-gs-masti", color: "#f97316", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gk-gs-masti.png" },
-  { name: "Physics Wallah", slug: "physics-wallah", color: "#6366f1", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/physics-wallah.png" },
-  { name: "Disha Online Class", slug: "disha-online", color: "#06b6d4", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/disha-online.png" },
-  { name: "Master Sahab", slug: "master-sahab", color: "#f43f5e", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/master-sahab.png" },
-  { name: "Classplus", slug: "classplus", color: "#a855f7", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/classplus.png" },
-  { name: "Unacademy", slug: "unacademy", color: "#22c55e", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/unacademy.png" },
-  { name: "Vidyakul", slug: "vidyakul", color: "#84cc16", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vidyakul.png" },
-  { name: "Science Magnet", slug: "science-magnet", color: "#d946ef", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/science-magnet.png" },
-  { name: "Parmar Academy", slug: "parmar-academy", color: "#0ea5e9", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/parmar-academy.png" },
-  { name: "RG Vikramjeet", slug: "rg-vikramjeet", color: "#fb923c", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/rg-vikramjeet.png" },
-  { name: "Testbook", slug: "testbook", color: "#2563eb", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/testbook.png" },
-  { name: "Utkarsh Classes", slug: "utkarsh", color: "#059669", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/utkarsh.png" },
-  { name: "Yes Officer", slug: "yes-officer", color: "#dc2626", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/yes-officer.png" },
-  { name: "KD LIVE", slug: "kd-live", color: "#7c3aed", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kd-live.png" },
-  { name: "Selection Way", slug: "selection-way", color: "#db2777", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/selection-way.png" },
-  { name: "Careerwill", slug: "careerwill", color: "#0d9488", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/careerwill.png" },
-  { name: "IFAS Academy", slug: "ifas", color: "#ea580c", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/ifas.png" },
-  { name: "MD Classes", slug: "md-classes", color: "#4f46e5", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/md-classes.png" },
-  { name: "GS Vision", slug: "gs-vision", color: "#0891b2", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gs-vision.png" },
-  { name: "Vibrant Academy", slug: "vibrant", color: "#e11d48", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vibrant.png" },
-  { name: "Apna College", slug: "apna-college", color: "#9333ea", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/apna-college.png" },
-  { name: "Unacademy Offline", slug: "unacademy-offline", color: "#16a34a", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/unacademy-offline.png" },
-  { name: "KGS Test", slug: "kgs-test", color: "#65a30d", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kgs-test.png" },
-  { name: "Vidyagram", slug: "vidyagram", color: "#f59e0b", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vidyagram.png" },
-  { name: "Adda247", slug: "adda247", color: "#c026d3", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/adda247.png" }
+  { name: "Next Topper", slug: "next-topper", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/next-topper.png" },
+  { name: "Study IQ", slug: "study-iq", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/studyiq.png" },
+  { name: "Rojgar With Ankit", slug: "rojgar-with-ankit", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/rojgar-with-ankit.png" },
+  { name: "CDS Journey", slug: "cds-journey", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/cds-journey.png" },
+  { name: "Khan Global Studies (KGS)", slug: "kgs", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kgs.png" },
+  { name: "UC Live Rani Mam", slug: "uc-live", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/uc-live.png" },
+  { name: "Gyanbindu", slug: "gyanbindu", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gyanbindu.png" },
+  { name: "GK GS Masti", slug: "gk-gs-masti", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gk-gs-masti.png" },
+  { name: "Physics Wallah", slug: "physics-wallah", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/physics-wallah.png" },
+  { name: "Disha Online Class", slug: "disha-online", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/disha-online.png" },
+  { name: "Master Sahab", slug: "master-sahab", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/master-sahab.png" },
+  { name: "Classplus", slug: "classplus", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/classplus.png" },
+  { name: "Unacademy", slug: "unacademy", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/unacademy.png" },
+  { name: "Vidyakul", slug: "vidyakul", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vidyakul.png" },
+  { name: "Science Magnet", slug: "science-magnet", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/science-magnet.png" },
+  { name: "Parmar Academy", slug: "parmar-academy", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/parmar-academy.png" },
+  { name: "RG Vikramjeet", slug: "rg-vikramjeet", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/rg-vikramjeet.png" },
+  { name: "Testbook", slug: "testbook", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/testbook.png" },
+  { name: "Utkarsh Classes", slug: "utkarsh", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/utkarsh.png" },
+  { name: "Yes Officer", slug: "yes-officer", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/yes-officer.png" },
+  { name: "KD LIVE", slug: "kd-live", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kd-live.png" },
+  { name: "Selection Way", slug: "selection-way", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/selection-way.png" },
+  { name: "Careerwill", slug: "careerwill", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/careerwill.png" },
+  { name: "IFAS Academy", slug: "ifas", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/ifas.png" },
+  { name: "MD Classes", slug: "md-classes", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/md-classes.png" },
+  { name: "GS Vision", slug: "gs-vision", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gs-vision.png" },
+  { name: "Vibrant Academy", slug: "vibrant", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vibrant.png" },
+  { name: "Apna College", slug: "apna-college", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/apna-college.png" },
+  { name: "Unacademy Offline", slug: "unacademy-offline", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/unacademy-offline.png" },
+  { name: "KGS Test", slug: "kgs-test", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kgs-test.png" },
+  { name: "Vidyagram", slug: "vidyagram", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vidyagram.png" },
+  { name: "Adda247", slug: "adda247", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/adda247.png" }
 ];
 
-const BATCHES = {
-  "next-topper": [
-    { title: "SSC CGL 2026 Batch 'Palvit'", description: "Tier-I & Tier-II Complete Preparation", price: "499", original_price: "1999", link: "https://nexttopper.com", image_url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "study-iq": [
-    { title: "UPSC IAS Live GS P2I Foundation 2027", description: "Prelims to Interview Program", price: "999", original_price: "4999", link: "https://studyiq.com", image_url: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "rojgar-with-ankit": [
-    { title: "UPSSSC PET 2026 (वरदान बैच 4.O)", description: "Complete Foundation Batch", price: "599", original_price: "1499", link: "https://rojgarwithankit.co.in", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "cds-journey": [
-    { title: "TANGO Math Batch (CDS 2 2024)", description: "Complete Maths for CDS Exam", price: "499", original_price: "1999", link: "https://cdsjourney.com", image_url: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "kgs": [
-    { title: "BPSC TRE 4.0 Class (9-10 & 11-12)", description: "Complete Batch for BPSC TRE", price: "799", original_price: "2999", link: "https://khanglobalstudies.com", image_url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "uc-live": [
-    { title: "ACHIEVERS 9.0 – Complete English Batch", description: "Grammar + Practice + Vocabulary + Descriptive", price: "1999", original_price: "4999", link: "https://uclive.org", image_url: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "gyanbindu": [
-    { title: "72nd BPSC SPECIAL BATCH", description: "Complete Foundation Batch for BPSC", price: "999", original_price: "3999", link: "https://gyanbinduacademy.com", image_url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "gk-gs-masti": [
-    { title: "Bihar Police GK Batch", description: "Complete GK/GS for Bihar Police", price: "399", original_price: "999", link: "https://gkgsmasti.com", image_url: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "physics-wallah": [
-    { title: "Surya 3.0 SSC CGL Target 2026", description: "Hinglish Complete Batch", price: "499", original_price: "1999", link: "https://www.pw.live/", image_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "disha-online": [
-    { title: "Parivartan Batch Class 11", description: "Bihar Board 2026-2027 Complete Batch", price: "299", original_price: "999", link: "https://dishaonlineclasses.in", image_url: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "master-sahab": [
-    { title: "Master Sahab Complete Batch", description: "All Competitive Exams Preparation", price: "399", original_price: "1499", link: "https://mastersahab.com", image_url: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "classplus": [
-    { title: "Classplus Batch Management", description: "For Coaching Institutes", price: "", original_price: "", link: "https://classplusapp.com", image_url: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "unacademy": [
-    { title: "ARJUN Batch- Full Syllabus 2026-27", description: "Complete Preparation for Class 10", price: "999", original_price: "4999", link: "https://unacademy.com", image_url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "vidyakul": [
-    { title: "Officer Batch 2.0 2026", description: "Complete Preparation for Competitive Exams", price: "499", original_price: "1999", link: "https://vidyakul.com", image_url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "science-magnet": [
-    { title: "विराट Batch (Viraat Batch)", description: "Railway ALP, Tech, JE & Group D", price: "299", original_price: "999", link: "https://sciencemagnet.com", image_url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "parmar-academy": [
-    { title: "Parmar GK Batch 4.0 - 2026", description: "Complete GK for SSC Exams", price: "399", original_price: "1499", link: "https://parmaracademy.com", image_url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "rg-vikramjeet": [
-    { title: "MATHS VOD BATCH", description: "For SSC, Railway, Delhi Police & Other Exams", price: "699", original_price: "1999", link: "https://rgvikramjeet.com", image_url: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "testbook": [
-    { title: "SSC GD 2026 দুর্জয় 2.0 Live Batch", description: "Complete SSC GD Preparation", price: "299", original_price: "999", link: "https://testbook.com", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "utkarsh": [
-    { title: "GK & GS Gaganyaan Batch", description: "By Kumar Gaurav Sir", price: "499", original_price: "1999", link: "https://utkarsh.com", image_url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "yes-officer": [
-    { title: "Kush Pandey – Exclusive Batch", description: "Complete Banking Preparation", price: "499", original_price: "1999", link: "https://yesofficer.com", image_url: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "kd-live": [
-    { title: "FOUNDATION BATCH FOR SSC", description: "Live Class VODs Test Series", price: "599", original_price: "1199", link: "https://kdcampus.live", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "selection-way": [
-    { title: "Selection Batch 4.0", description: "Complete SSC Preparation", price: "499", original_price: "1999", link: "https://selectionway.com", image_url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "careerwill": [
-    { title: "SSC Pratham-17", description: "Complete SSC Foundation Batch", price: "1999", original_price: "4999", link: "https://careerwill.com", image_url: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "ifas": [
-    { title: "IFAS Emotion Batch 8.0", description: "One Target CSIR JRF Dec 2026", price: "999", original_price: "4999", link: "https://ifasacademy.com", image_url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "md-classes": [
-    { title: "विश्वास 2026 + RANKERS BATCH FREE", description: "Complete RRB NTPC Batch", price: "399", original_price: "1499", link: "https://mdclasses.com", image_url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "gs-vision": [
-    { title: "GS + CSAT Regular Batch 2026", description: "Foundation Course General Studies", price: "999", original_price: "3999", link: "https://gsvision.com", image_url: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "vibrant": [
-    { title: "JEE 2027: DROPPER X2 BATCH", description: "Complete JEE Preparation", price: "3500", original_price: "7000", link: "https://vibrantacademy.com", image_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "apna-college": [
-    { title: "Prime 2.0 - Complete AI/ML Batch", description: "Job Ready in 4.5 Months", price: "6880", original_price: "13999", link: "https://www.apnacollege.in/", image_url: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "unacademy-offline": [
-    { title: "UPSC GS Foundation Migration", description: "Admissions Open for 2026", price: "", original_price: "", link: "https://unacademy.com", image_url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "kgs-test": [
-    { title: "KGS Test Series", description: "Complete Test Series for All Exams", price: "299", original_price: "999", link: "https://kgs.live", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "vidyagram": [
-    { title: "RRB Group-D 2026 Free Live Test", description: "All India Live Test Series", price: "", original_price: "", link: "https://www.vidyagram.online/", image_url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
-  "adda247": [
-    { title: "PowerPack Pro 2026 Batch for IBPS PO", description: "Complete Banking Preparation", price: "499", original_price: "1999", link: "https://www.adda247.com/", image_url: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=500&q=80", featured: true }
-  ]
-};
+// ============================================================
+// YAHAN APNE BATCHES ADD KARO
+// ============================================================
+const BATCHES = [
+  // Example Batch 1
+  { institute: "Next Topper", title: "SSC CGL 2026 Complete Batch", description: "Full syllabus coverage with practice sets", price: "499", original_price: "1999", link: "https://nexttopper.com", image_url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80" },
+  // Example Batch 2
+  { institute: "Study IQ", title: "UPSC Prelims 2026", description: "Complete GS + CSAT preparation", price: "999", original_price: "4999", link: "https://studyiq.com", image_url: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500&q=80" },
+  // Example Batch 3
+  { institute: "Physics Wallah", title: "Surya 3.0 SSC CGL Target 2026", description: "Hinglish Complete Batch", price: "499", original_price: "1999", link: "https://www.pw.live/", image_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500&q=80" }
+];
 
-const LOCK_KEY = 'batchhub_unlocked';
-
-function unlock() {
-  localStorage.setItem(LOCK_KEY, 'true');
-  document.getElementById('lockOverlay').classList.add('hidden');
-}
-
-function checkUnlock() {
-  if (localStorage.getItem(LOCK_KEY) === 'true') {
-    document.getElementById('lockOverlay').classList.add('hidden');
-  }
-}
-
-// Theme Toggle Logic
-const themeToggle = document.getElementById('themeToggle');
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme === 'light') {
-  document.body.classList.add('light');
-  themeToggle.textContent = '☀️';
-}
-themeToggle.onclick = () => {
-  document.body.classList.toggle('light');
-  if (document.body.classList.contains('light')) {
-    localStorage.setItem('theme', 'light');
-    themeToggle.textContent = '☀️';
-  } else {
+// ============================================================
+// LOGIC
+// ============================================================
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+  const btn = document.querySelector('.theme-toggle');
+  if(document.body.classList.contains('dark')) {
+    btn.textContent = '☀️';
     localStorage.setItem('theme', 'dark');
-    themeToggle.textContent = '🌙';
+  } else {
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
   }
-};
+}
 
-function render(filter = '') {
-  const container = document.getElementById('container');
-  const f = filter.trim().toLowerCase();
+// Check saved theme
+if(localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+  document.querySelector('.theme-toggle').textContent = '☀️';
+}
+
+function switchView(view) {
+  const dash = document.getElementById('dashboard-view');
+  const batch = document.getElementById('batches-view');
+  const navBatches = document.getElementById('nav-batches');
+  const navStudy = document.getElementById('nav-study');
+
+  if(view === 'batches') {
+    dash.style.display = 'none';
+    batch.style.display = 'block';
+    navBatches.classList.add('active');
+    navStudy.classList.remove('active');
+    renderBatches();
+  } else {
+    dash.style.display = 'block';
+    batch.style.display = 'none';
+    navBatches.classList.remove('active');
+    navStudy.classList.add('active');
+  }
+  window.scrollTo(0,0);
+}
+
+function renderBatches(filter = '') {
+  const container = document.getElementById('batchContainer');
+  const f = filter.toLowerCase();
   container.innerHTML = '';
-  let totalBatches = 0;
 
-  INSTITUTES.forEach(inst => {
-    const batches = BATCHES[inst.slug] || [];
-    totalBatches += batches.length;
-    const matched = batches.filter(b =>
-      !f || b.title.toLowerCase().includes(f) || (b.description || '').toLowerCase().includes(f)
-    );
-    if (f && !inst.name.toLowerCase().includes(f) && matched.length === 0) return;
-
-    const section = document.createElement('div');
-    section.className = 'inst-section';
-    section.innerHTML = `
-      <div class="inst-header">
-        <img src="${inst.logo}" alt="${inst.name}" class="inst-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <div class="inst-dot" style="background:${inst.color}; display:none;"></div>
-        <h2>${inst.name}</h2>
-        <span class="inst-count">${batches.length} batches</span>
-      </div>
-      <div class="batch-grid">
-        ${matched.length
-          ? matched.map(b => `
-            <div class="batch-card">
-              ${b.featured ? '<span class="badge-featured">FEATURED</span>' : ''}
-              ${b.image_url ? `<img src="${b.image_url}" onerror="this.style.display='none'" loading="lazy">` : ''}
-              <h3>${b.title}</h3>
-              <p class="desc">${b.description || ''}</p>
-              <div class="price-row">
-                ${b.price ? `<span class="price">₹${b.price}</span>` : ''}
-                ${b.original_price ? `<span class="old-price">₹${b.original_price}</span>` : ''}
-              </div>
-              ${b.link ? `<a href="${b.link}" target="_blank" rel="noopener">View Batch →</a>` : ''}
-            </div>`).join('')
-          : '<div class="empty">Abhi koi batch add nahi hua.</div>'}
-      </div>
-    `;
-    container.appendChild(section);
+  // Group batches by institute
+  const grouped = {};
+  BATCHES.forEach(b => {
+    if(!grouped[b.institute]) grouped[b.institute] = [];
+    grouped[b.institute].push(b);
   });
 
-  document.getElementById('batchCount').textContent = totalBatches + '+';
+  let found = false;
+
+  INSTITUTES.forEach(inst => {
+    const instBatches = grouped[inst.name] || [];
+    const matched = instBatches.filter(b => 
+      !f || b.title.toLowerCase().includes(f) || inst.name.toLowerCase().includes(f) || b.description.toLowerCase().includes(f)
+    );
+
+    if(matched.length > 0 || (!f && instBatches.length > 0)) {
+      found = true;
+      // Institute Header
+      const header = document.createElement('div');
+      header.style.cssText = "display:flex; align-items:center; gap:10px; margin: 16px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border);";
+      header.innerHTML = `
+        <img src="${inst.logo}" style="width:32px; height:32px; border-radius:8px; background:#fff; object-fit:contain; padding:2px; border:1px solid var(--border);" onerror="this.style.display='none'">
+        <h3 style="font-size:15px; font-weight:800;">${inst.name}</h3>
+        <span style="font-size:10px; background:var(--primary-light); color:var(--primary); padding:2px 8px; border-radius:50px; font-weight:800; margin-left:auto;">${instBatches.length} batches</span>
+      `;
+      container.appendChild(header);
+
+      // Batch Cards
+      matched.forEach(b => {
+        const card = document.createElement('div');
+        card.className = 'batch-card';
+        card.innerHTML = `
+          <img src="${b.image_url}" class="batch-logo" onerror="this.src='https://via.placeholder.com/50'">
+          <div class="batch-info">
+            <h4>${b.title}</h4>
+            <p>${b.description}</p>
+            <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+              <span class="batch-price">₹${b.price}</span>
+              <span style="font-size:11px; text-decoration:line-through; color:var(--muted);">₹${b.original_price}</span>
+            </div>
+          </div>
+          <a href="${b.link}" target="_blank" class="batch-btn">View →</a>
+        `;
+        container.appendChild(card);
+      });
+    }
+  });
+
+  if(!found && BATCHES.length === 0) {
+    container.innerHTML = `<div style="text-align:center; padding:40px 20px; color:var(--muted); font-weight:700;">Abhi koi batch add nahi hua.<br><br>Admin panel se batches add karein.</div>`;
+  } else if(!found && f) {
+    container.innerHTML = `<div style="text-align:center; padding:40px 20px; color:var(--muted); font-weight:700;">Kuch nahi mila.</div>`;
+  }
 }
 
-document.getElementById('searchBox').addEventListener('input', (e) => render(e.target.value));
+function toggleMenu() {
+  alert("Menu: Explore Batches, My Profile, Settings, Logout");
+}
 
-checkUnlock();
-render();
+// Initialize
+renderBatches();
 </script>
 </body>
 </html>
