@@ -67,6 +67,7 @@
 
   .inst-section{margin-bottom:40px;background:var(--card);border-radius:18px;padding:24px;border:1px solid var(--border); box-shadow: 0 4px 20px var(--shadow);}
   .inst-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+  .inst-logo{width:40px;height:40px;border-radius:10px;object-fit:contain;background:#ffffff;padding:3px; border: 1px solid var(--border);}
   .inst-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
   .inst-header h2{font-size:22px;font-weight:700;}
   .inst-count{margin-left:auto;font-size:12px;color:var(--muted);background:var(--bg);padding:4px 12px;border-radius:100px; border: 1px solid var(--border);}
@@ -148,39 +149,42 @@
 </footer>
 
 <script>
+// ============================================================
+// 32 INSTITUTES KI LIST WITH LOGOS
+// ============================================================
 const INSTITUTES = [
-  { name: "Next Topper", slug: "next-topper", color: "#f59e0b", logo: "" },
-  { name: "Study IQ", slug: "study-iq", color: "#3b82f6", logo: "" },
-  { name: "Rojgar With Ankit", slug: "rojgar-with-ankit", color: "#10b981", logo: "" },
-  { name: "CDS Journey", slug: "cds-journey", color: "#ef4444", logo: "" },
-  { name: "Khan Global Studies (KGS)", slug: "kgs", color: "#8b5cf6", logo: "" },
-  { name: "UC Live Rani Mam", slug: "uc-live", color: "#ec4899", logo: "" },
-  { name: "Gyanbindu", slug: "gyanbindu", color: "#14b8a6", logo: "" },
-  { name: "GK GS Masti", slug: "gk-gs-masti", color: "#f97316", logo: "" },
-  { name: "Physics Wallah", slug: "physics-wallah", color: "#6366f1", logo: "" },
-  { name: "Disha Online Class", slug: "disha-online", color: "#06b6d4", logo: "" },
-  { name: "Master Sahab", slug: "master-sahab", color: "#f43f5e", logo: "" },
-  { name: "Classplus", slug: "classplus", color: "#a855f7", logo: "" },
-  { name: "Unacademy", slug: "unacademy", color: "#22c55e", logo: "" },
-  { name: "Vidyakul", slug: "vidyakul", color: "#84cc16", logo: "" },
-  { name: "Science Magnet", slug: "science-magnet", color: "#d946ef", logo: "" },
-  { name: "Parmar Academy", slug: "parmar-academy", color: "#0ea5e9", logo: "" },
-  { name: "RG Vikramjeet", slug: "rg-vikramjeet", color: "#fb923c", logo: "" },
-  { name: "Testbook", slug: "testbook", color: "#2563eb", logo: "" },
-  { name: "Utkarsh Classes", slug: "utkarsh", color: "#059669", logo: "" },
-  { name: "Yes Officer", slug: "yes-officer", color: "#dc2626", logo: "" },
-  { name: "KD LIVE", slug: "kd-live", color: "#7c3aed", logo: "" },
-  { name: "Selection Way", slug: "selection-way", color: "#db2777", logo: "" },
-  { name: "Careerwill", slug: "careerwill", color: "#0d9488", logo: "" },
-  { name: "IFAS Academy", slug: "ifas", color: "#ea580c", logo: "" },
-  { name: "MD Classes", slug: "md-classes", color: "#4f46e5", logo: "" },
-  { name: "GS Vision", slug: "gs-vision", color: "#0891b2", logo: "" },
-  { name: "Vibrant Academy", slug: "vibrant", color: "#e11d48", logo: "" },
-  { name: "Apna College", slug: "apna-college", color: "#9333ea", logo: "" },
-  { name: "Unacademy Offline", slug: "unacademy-offline", color: "#16a34a", logo: "" },
-  { name: "KGS Test", slug: "kgs-test", color: "#65a30d", logo: "" },
-  { name: "Adda247", slug: "adda247", color: "#c026d3", logo: "" },
-  { name: "PW Skills", slug: "pw-skills", color: "#0284c7", logo: "" }
+  { name: "Next Topper", slug: "next-topper", color: "#f59e0b", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/next-topper.png" },
+  { name: "Study IQ", slug: "study-iq", color: "#3b82f6", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/studyiq.png" },
+  { name: "Rojgar With Ankit", slug: "rojgar-with-ankit", color: "#10b981", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/rojgar-with-ankit.png" },
+  { name: "CDS Journey", slug: "cds-journey", color: "#ef4444", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/cds-journey.png" },
+  { name: "Khan Global Studies (KGS)", slug: "kgs", color: "#8b5cf6", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kgs.png" },
+  { name: "UC Live Rani Mam", slug: "uc-live", color: "#ec4899", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/uc-live.png" },
+  { name: "Gyanbindu", slug: "gyanbindu", color: "#14b8a6", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gyanbindu.png" },
+  { name: "GK GS Masti", slug: "gk-gs-masti", color: "#f97316", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gk-gs-masti.png" },
+  { name: "Physics Wallah", slug: "physics-wallah", color: "#6366f1", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/physics-wallah.png" },
+  { name: "Disha Online Class", slug: "disha-online", color: "#06b6d4", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/disha-online.png" },
+  { name: "Master Sahab", slug: "master-sahab", color: "#f43f5e", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/master-sahab.png" },
+  { name: "Classplus", slug: "classplus", color: "#a855f7", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/classplus.png" },
+  { name: "Unacademy", slug: "unacademy", color: "#22c55e", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/unacademy.png" },
+  { name: "Vidyakul", slug: "vidyakul", color: "#84cc16", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vidyakul.png" },
+  { name: "Science Magnet", slug: "science-magnet", color: "#d946ef", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/science-magnet.png" },
+  { name: "Parmar Academy", slug: "parmar-academy", color: "#0ea5e9", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/parmar-academy.png" },
+  { name: "RG Vikramjeet", slug: "rg-vikramjeet", color: "#fb923c", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/rg-vikramjeet.png" },
+  { name: "Testbook", slug: "testbook", color: "#2563eb", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/testbook.png" },
+  { name: "Utkarsh Classes", slug: "utkarsh", color: "#059669", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/utkarsh.png" },
+  { name: "Yes Officer", slug: "yes-officer", color: "#dc2626", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/yes-officer.png" },
+  { name: "KD LIVE", slug: "kd-live", color: "#7c3aed", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kd-live.png" },
+  { name: "Selection Way", slug: "selection-way", color: "#db2777", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/selection-way.png" },
+  { name: "Careerwill", slug: "careerwill", color: "#0d9488", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/careerwill.png" },
+  { name: "IFAS Academy", slug: "ifas", color: "#ea580c", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/ifas.png" },
+  { name: "MD Classes", slug: "md-classes", color: "#4f46e5", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/md-classes.png" },
+  { name: "GS Vision", slug: "gs-vision", color: "#0891b2", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/gs-vision.png" },
+  { name: "Vibrant Academy", slug: "vibrant", color: "#e11d48", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vibrant.png" },
+  { name: "Apna College", slug: "apna-college", color: "#9333ea", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/apna-college.png" },
+  { name: "Unacademy Offline", slug: "unacademy-offline", color: "#16a34a", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/unacademy-offline.png" },
+  { name: "KGS Test", slug: "kgs-test", color: "#65a30d", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/kgs-test.png" },
+  { name: "Vidyagram", slug: "vidyagram", color: "#f59e0b", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/vidyagram.png" },
+  { name: "Adda247", slug: "adda247", color: "#c026d3", logo: "https://noisy-dream-5604.edumart.workers.dev/logos/adda247.png" }
 ];
 
 // ============================================================
@@ -191,17 +195,11 @@ const INSTITUTES = [
 //
 //   { title: "Batch ka naam", description: "Chhota description", price: "499", original_price: "1999", link: "https://...", image_url: "https://...", featured: true },
 //
-// ⚠️ Note: title aur link zaroori hai, baaki optional
 // ============================================================
 
 const BATCHES = {
-  "next-topper": [
-    { title: "SSC CGL 2025 Complete Batch", description: "Full syllabus coverage with practice sets", price: "499", original_price: "1999", link: "https://nexttopper.com", image_url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=500&q=80", featured: true },
-    { title: "Railway Group D 2025", description: "Latest pattern based batch", price: "399", original_price: "1499", link: "https://nexttopper.com", image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=80", featured: false }
-  ],
-  "study-iq": [
-    { title: "UPSC Prelims 2026", description: "Complete GS + CSAT preparation", price: "999", original_price: "4999", link: "https://studyiq.com", image_url: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=500&q=80", featured: true }
-  ],
+  "next-topper": [],
+  "study-iq": [],
   "rojgar-with-ankit": [],
   "cds-journey": [],
   "kgs": [],
@@ -230,8 +228,8 @@ const BATCHES = {
   "apna-college": [],
   "unacademy-offline": [],
   "kgs-test": [],
-  "adda247": [],
-  "pw-skills": []
+  "vidyagram": [],
+  "adda247": []
 };
 
 const LOCK_KEY = 'batchhub_unlocked';
@@ -283,7 +281,8 @@ function render(filter = '') {
     section.className = 'inst-section';
     section.innerHTML = `
       <div class="inst-header">
-        <div class="inst-dot" style="background:${inst.color}"></div>
+        <img src="${inst.logo}" alt="${inst.name}" class="inst-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="inst-dot" style="background:${inst.color}; display:none;"></div>
         <h2>${inst.name}</h2>
         <span class="inst-count">${batches.length} batches</span>
       </div>
