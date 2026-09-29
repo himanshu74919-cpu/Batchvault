@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BatchVault — Sabhi Coaching Batches Ek Jagah</title>
+<style>
+  :root{--bg:#0a0a0f;--card:#1a1a26;--border:#2a2a3a;--text:#e8e8f0;--muted:#8888a0;--grad:linear-gradient(135deg,#6366f1,#a855f7,#ec4899);}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter','Segoe UI',sans-serif;}
+  body{background:var(--bg);color:var(--text);line-height:1.6;}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 20% 0%,rgba(99,102,241,.15),transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(168,85,247,.12),transparent 50%);}
+  header{background:rgba(10,10,15,.85);backdrop-filter:blur(20px);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);}
+  .logo{font-size:24px;font-weight:800;}
+  .logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .tg-badge{background:#229ED9;color:#fff;padding:8px 16px;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;}
+  .hero{text-align:center;padding:80px 20px 40px;max-width:900px;margin:auto;}
+  .hero-badge{display:inline-block;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);color:#a5b4fc;padding:6px 16px;border-radius:100px;font-size:13px;font-weight:600;margin-bottom:20px;}
+  .hero h1{font-size:clamp(32px,6vw,56px);font-weight:900;letter-spacing:-2px;line-height:1.1;margin-bottom:16px;}
+  .hero h1 span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero p{color:var(--muted);font-size:17px;max-width:600px;margin:auto;}
+  .stats-row{display:flex;justify-content:center;gap:40px;margin-top:36px;flex-wrap:wrap;}
+  .stat-num{font-size:28px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;}
+  .search-wrap{max-width:560px;margin:36px auto 0;}
+  .search-wrap input{width:100%;padding:16px 20px;border-radius:14px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:15px;}
+  .search-wrap input:focus{outline:none;border-color:#6366f1;}
+  .content{max-width:1200px;margin:auto;padding:20px 20px 80px;}
+  .lock-overlay{position:fixed;inset:0;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);z-index:500;display:flex;justify-content:center;align-items:center;padding:20px;transition:opacity .4s,visibility .4s;}
+  .lock-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+  .lock-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px 32px;max-width:420px;width:100%;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.5);position:relative;overflow:hidden;}
+  .lock-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad);}
+  .lock-icon{font-size:56px;margin-bottom:16px;display:block;}
+  .lock-box h2{font-size:24px;font-weight:800;margin-bottom:10px;}
+  .lock-box p{color:var(--muted);font-size:15px;margin-bottom:28px;}
+  .btn-telegram{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#229ED9;color:#fff;padding:15px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;width:100%;margin-bottom:14px;transition:all .25s;}
+  .btn-telegram:hover{background:#1a8bbf;transform:translateY(-2px);}
+  .btn-verify{background:var(--grad);color:#fff;padding:15px 32px;border-radius:12px;font-weight:700;font-size:16px;width:100%;border:none;cursor:pointer;transition:all .25s;}
+  .btn-verify:hover{transform:translateY(-2px);}
+  .lock-note{font-size:13px;color:var(--muted);margin-top:16px;}
+  .inst-section{margin-bottom:36px;background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--border);}
+  .inst-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+  .inst-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+  .inst-header h2{font-size:20px;font-weight:700;}
+  .inst-count{margin-left:auto;font-size:12px;color:var(--muted);background:var(--bg);padding:4px 12px;border-radius:100px;}
+  .batch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;}
+  .batch-card{background:#12121a;border-radius:14px;padding:16px;border:1px solid var(--border);transition:all .25s;display:flex;flex-direction:column;position:relative;}
+  .batch-card:hover{transform:translateY(-4px);border-color:#6366f1;box-shadow:0 12px 40px rgba(99,102,241,.15);}
+  .batch-card img{width:100%;height:140px;object-fit:cover;border-radius:10px;margin-bottom:12px;}
+  .batch-card h3{font-size:15px;font-weight:700;margin-bottom:6px;}
+  .batch-card .desc{font-size:13px;color:var(--muted);margin-bottom:10px;flex-grow:1;}
+  .price-row{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
+  .price{font-weight:800;color:#22c55e;font-size:17px;}
+  .old-price{color:#555570;text-decoration:line-through;font-size:13px;}
+  .batch-card a{display:block;text-align:center;background:var(--grad);color:#fff;padding:10px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;}
+  .empty{color:var(--muted);font-size:14px;font-style:italic;padding:8px 0;}
+  .badge-featured{position:absolute;top:12px;right:12px;background:var(--grad);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.5px;}
+  .footer{text-align:center;padding:36px 20px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);}
+  .footer a{color:#a5b4fc;text-decoration:none;}
+  @media(max-width:600px){.hero{padding:50px 16px 30px;}.batch-grid{grid-template-columns:1fr;}.inst-section{padding:16px;}}
+</style>
+</head>
+<body>
+
+<div class="lock-overlay" id="lockOverlay">
+  <div class="lock-box">
+    <span class="lock-icon">🔒</span>
+    <h2>Batches Unlock Karo</h2>
+    <p>Saare batches dekhne ke liye pehle humara Telegram channel join karo. Bilkul free hai!</p>
+    <a href="https://t.me/batchhubb" target="_blank" rel="noopener" class="btn-telegram">✈️ Join @batchhubb</a>
+    <button class="btn-verify" onclick="unlock()">✅ Maine Join Kar Liya — Unlock Karo</button>
+    <p class="lock-note">Join karne ke baad upar wala button dabao.</p>
+  </div>
+</div>
+
+<header>
+  <div class="logo">📦 Batch<span>Vault</span></div>
+  <a href="https://t.me/Supermannn_x" target="_blank" class="tg-badge">✈️ Contact</a>
+</header>
+
+<section class="hero">
+  <div class="hero-badge">⚡ India's #1 Coaching Batch Aggregator</div>
+  <h1>Sabhi Coaching <span>Batches</span><br>Ek Jagah</h1>
+  <p>32+ top institutes ke latest batches — Study IQ, Physics Wallah, Unacademy, Adda247, KGS aur bahut kuch.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">32+</div><div class="stat-label">Institutes</div></div>
+    <div class="stat"><div class="stat-num" id="batchCount">0</div><div class="stat-label">Batches</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free</div></div>
+  </div>
+  <div class="search-wrap">
+    <input id="searchBox" type="text" placeholder="🔍 Batch ya institute search karo...">
+  </div>
+</section>
+
+<main class="content" id="container"></main>
+
+<footer class="footer">
+  <p>© 2025 BatchVault — Sabhi batches partner institutes ke hain.</p>
+  <p style="margin-top:6px;">Telegram: <a href="https://t.me/batchhubb" target="_blank">@batchhubb</a> | Contact: <a href="https://t.me/Supermannn_x" target="_blank">@Supermannn_x</a></p>
+</footer>
+
+<script>
+const INSTITUTES = [
+  { name: "Next Topper", slug: "next-topper", color: "#f59e0b" },
+  { name: "Study IQ", slug: "study-iq", color: "#3b82f6" },
+  { name: "Rojgar With Ankit", slug: "rojgar-with-ankit", color: "#10b981" },
+  { name: "CDS Journey", slug: "cds-journey", color: "#ef4444" },
+  { name: "Khan Global Studies (KGS)", slug: "kgs", color: "#8b5cf6" },
+  { name: "UC Live Rani Mam", slug: "uc-live", color: "#ec4899" },
+  { name: "Gyanbindu", slug: "gyanbindu", color: "#14b8a6" },
+  { name: "GK GS Masti", slug: "gk-gs-masti", color: "#f97316" },
+  { name: "Physics Wallah", slug: "physics-wallah", color: "#6366f1" },
+  { name: "Disha Online Class", slug: "disha-online", color: "#06b6d4" },
+  { name: "Master Sahab", slug: "master-sahab", color: "#f43f5e" },
+  { name: "Classplus", slug: "classplus", color: "#a855f7" },
+  { name: "Unacademy", slug: "unacademy", color: "#22c55e" },
+  { name: "Vidyakul", slug: "vidyakul", color: "#84cc16" },
+  { name: "Science Magnet", slug: "science-magnet", color: "#d946ef" },
+  { name: "Parmar Academy", slug: "parmar-academy", color: "#0ea5e9" },
+  { name: "RG Vikramjeet", slug: "rg-vikramjeet", color: "#fb923c" },
+  { name: "Testbook", slug: "testbook", color: "#2563eb" },
+  { name: "Utkarsh Classes", slug: "utkarsh", color: "#059669" },
+  { name: "Yes Officer", slug: "yes-officer", color: "#dc2626" },
+  { name: "KD LIVE", slug: "kd-live", color: "#7c3aed" },
+  { name: "Selection Way", slug: "selection-way", color: "#db2777" },
+  { name: "Careerwill", slug: "careerwill", color: "#0d9488" },
+  { name: "IFAS Academy", slug: "ifas", color: "#ea580c" },
+  { name: "MD Classes", slug: "md-classes", color: "#4f46e5" },
+  { name: "GS Vision", slug: "gs-vision", color: "#0891b2" },
+  { name: "Vibrant Academy", slug: "vibrant", color: "#e11d48" },
+  { name: "Apna College", slug: "apna-college", color: "#9333ea" },
+  { name: "Unacademy Offline", slug: "unacademy-offline", color: "#16a34a" },
+  { name: "KGS Test", slug: "kgs-test", color: "#65a30d" },
+  { name: "Adda247", slug: "adda247", color: "#c026d3" },
+  { name: "PW Skills", slug: "pw-skills", color: "#0284c7" }
+];
+
+// ============================================================
+// YAHAN BATCHES ADD KARO
+// ============================================================
+// Naya batch add karne ke liye neeche wala format use karo.
+// Har institute ke [] ke andar batches daalo (comma se alag).
+//
+//   { title: "Batch ka naam", description: "Chhota description", price: "499", original_price: "1999", link: "https://...", image_url: "https://...", featured: true },
+//
+// ============================================================
+
+const BATCHES = {
+  "next-topper": [],
+  "study-iq": [],
+  "rojgar-with-ankit": [],
+  "cds-journey": [],
+  "kgs": [],
+  "uc-live": [],
+  "gyanbindu": [],
+  "gk-gs-masti": [],
+  "physics-wallah": [],
+  "disha-online": [],
+  "master-sahab": [],
+  "classplus": [],
+  "unacademy": [],
+  "vidyakul": [],
+  "science-magnet": [],
+  "parmar-academy": [],
+  "rg-vikramjeet": [],
+  "testbook": [],
+  "utkarsh": [],
+  "yes-officer": [],
+  "kd-live": [],
+  "selection-way": [],
+  "careerwill": [],
+  "ifas": [],
+  "md-classes": [],
+  "gs-vision": [],
+  "vibrant": [],
+  "apna-college": [],
+  "unacademy-offline": [],
+  "kgs-test": [],
+  "adda247": [],
+  "pw-skills": []
+};
+
+const LOCK_KEY = 'batchvault_unlocked';
+
+function unlock() {
+  localStorage.setItem(LOCK_KEY, 'true');
+  document.getElementById('lockOverlay').classList.add('hidden');
+}
+
+function checkUnlock() {
+  if (localStorage.getItem(LOCK_KEY) === 'true') {
+    document.getElementById('lockOverlay').classList.add('hidden');
+  }
+}
+
+function render(filter = '') {
+  const container = document.getElementById('container');
+  const f = filter.trim().toLowerCase();
+  container.innerHTML = '';
+  let totalBatches = 0;
+
+  INSTITUTES.forEach(inst => {
+    const batches = BATCHES[inst.slug] || [];
+    totalBatches += batches.length;
+    const matched = batches.filter(b =>
+      !f || b.title.toLowerCase().includes(f) || (b.description || '').toLowerCase().includes(f)
+    );
+    if (f && !inst.name.toLowerCase().includes(f) && matched.length === 0) return;
+
+    const section = document.createElement('div');
+    section.className = 'inst-section';
+    section.innerHTML = `
+      <div class="inst-header">
+        <div class="inst-dot" style="background:${inst.color}"></div>
+        <h2>${inst.name}</h2>
+        <span class="inst-count">${batches.length} batches</span>
+      </div>
+      <div class="batch-grid">
+        ${matched.length
+          ? matched.map(b => `
+            <div class="batch-card">
+              ${b.featured ? '<span class="badge-featured">FEATURED</span>' : ''}
+              ${b.image_url ? `<img src="${b.image_url}" onerror="this.style.display='none'" loading="lazy">` : ''}
+              <h3>${b.title}</h3>
+              <p class="desc">${b.description || ''}</p>
+              <div class="price-row">
+                ${b.price ? `<span class="price">₹${b.price}</span>` : ''}
+                ${b.original_price ? `<span class="old-price">₹${b.original_price}</span>` : ''}
+              </div>
+              ${b.link ? `<a href="${b.link}" target="_blank" rel="noopener">View Batch →</a>` : ''}
+            </div>`).join('')
+          : '<div class="empty">Abhi koi batch add nahi hua.</div>'}
+      </div>
+    `;
+    container.appendChild(section);
+  });
+
+  document.getElementById('batchCount').textContent = totalBatches + '+';
+}
+
+document.getElementById('searchBox').addEventListener('input', (e) => render(e.target.value));
+
+checkUnlock();
+render();
+</script>
+</body>
+</html>
